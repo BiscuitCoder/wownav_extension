@@ -1,0 +1,34 @@
+{
+    "name": "书签导航生成器",
+    "description": "将Chrome书签转换为美观的导航页面",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "bookmarks",
+        "tabs",
+        "scripting",
+        "activeTab"
+    ],
+    "host_permissions": [
+        "http://localhost:3008/*"
+    ],
+    "icons": {
+        "16": "images/logo.png",
+        "48": "images/logo.png",
+        "128": "images/logo.png"
+    },
+    "action": {
+        "default_title": "书签导航生成器",
+        "default_icon": {
+            "16": "images/icon16.png",
+            "48": "images/icon48.png",
+            "128": "images/icon128.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "chrome_url_overrides": {
+        "popup": "index.html"
+    }
+}

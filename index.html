@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>书签管理器</title>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .color-picker-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        #themeColor {
+            width: 50px;
+            height: 30px;
+            padding: 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        #themeColorText {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        #themeColorText:invalid {
+            border-color: #ff4444;
+        }
+        
+        .generate-button.loading {
+            position: relative;
+            color: transparent;
+        }
+        
+        .generate-button.loading::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        .generated-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .generated-link a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .generated-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 左侧书签区域 -->
+        <div class="bookmarks-section">
+            <h2>我的书签</h2>
+            <div id="bookmarksList"></div>
+        </div>
+
+        <!-- 右侧SEO设置区域 -->
+        <div class="seo-section">
+            <h2>SEO设置</h2>
+            <form class="seo-form" id="seoForm">
+                <div class="form-group">
+                    <label for="siteTitle">网站标题</label>
+                    <input type="text" id="siteTitle" placeholder="输入网站标题">
+                    <div class="error-message">请输入网站标题</div>
+                </div>
+                <div class="form-group">
+                    <label for="siteDescription">网站描述</label>
+                    <textarea id="siteDescription" placeholder="输入网站描述"></textarea>
+                    <div class="error-message">请输入网站描述</div>
+                </div>
+                <div class="form-group">
+                    <label for="keywords">关键词</label>
+                    <input type="text" id="keywords" placeholder="输入关键词，用逗号分隔">
+                    <div class="error-message">请输入关键词</div>
+                </div>
+                <div class="form-group">
+                    <label for="themeColor">主题颜色</label>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="themeColor" value="#4a90e2">
+                        <input type="text" id="themeColorText" placeholder="#4a90e2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="customCode" class="no-required">Ai自定义代码（可选）</label>
+                    <textarea id="customCode" placeholder="输入需求，系统将通过大模型生成响应代码插入到页面中。
+
+例如：
+加载完成后，在搜索栏下面，插入一个banner图片链接为：
+https://github.com/lxdao-official/.github/raw/main/images/LXDAO.png
+
+图片要求：
+1. 加入一个css的心跳循环动画
+2. 图片宽度为100%自适应
+3. 点击这个图片alert('欢迎各位LX，让给我们共创良心社会🤝~ ')"></textarea>
+                </div>
+                <div class="button-group">
+                    <button id="exportButton" class="action-button export-button" style="display: none;">导出选中项</button>
+                    <button type="button" id="generateButton" class="action-button generate-button">生成在线导航</button>
+                </div>
+                <div id="generatedLink" class="generated-link" style="display: none;">
+                    <a href="#" target="_blank">站点已生成，点击查看</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 预览区域 -->
+    <div class="preview-section" id="previewSection">
+        <div class="preview-content">
+            <button class="preview-close" id="previewClose">&times;</button>
+            <div id="previewContent"></div>
+        </div>
+    </div>
+
+    <script src="scripts/py.js"></script>
+    <script src="scripts/popup.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+
+</html>

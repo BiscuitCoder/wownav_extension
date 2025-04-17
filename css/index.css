@@ -1,0 +1,449 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    max-width: 1600px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+
+/* 左侧书签区域 */
+
+.bookmarks-section {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    border-right: 1px solid #e0e0e0;
+    overflow-y: auto;
+}
+
+
+/* 右侧SEO设置区域 */
+
+.seo-section {
+    flex: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.bookmark-folder {
+    margin: 15px 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.folder-header {
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+    transition: background-color 0.2s;
+}
+
+.folder-header:hover {
+    background-color: #e8e8e8;
+}
+
+.folder-content {
+    display: none;
+    padding: 16px;
+}
+
+.folder-content.expanded {
+    display: block;
+}
+
+.bookmark-item {
+    margin: 10px 0;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 4px;
+}
+
+.bookmark-item:hover {
+    background-color: #f9f9f9;
+    transform: translateX(5px);
+}
+
+.bookmark-title {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+    flex: 1;
+    font-size: 1.1em;
+}
+
+.bookmark-url {
+    color: #666;
+    font-size: 0.9em;
+    word-break: break-all;
+    flex: 1;
+}
+
+.toggle-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.toggle-icon.expanded {
+    transform: rotate(90deg);
+}
+
+.checkbox-wrapper {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.float-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    font-size: 1.1em;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.float-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.folder-title {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.folder-name {
+    flex: 1;
+    margin-right: 12px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.bookmark-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* SEO表单样式 */
+
+.seo-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+
+/* 响应式布局 */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .bookmarks-section,
+    .seo-section {
+        flex: none;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    .bookmark-item {
+        flex-direction: column;
+    }
+    .bookmark-url {
+        margin-top: 8px;
+    }
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-button {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    font-size: 1.1em;
+    color: white;
+}
+
+.export-button {
+    background-color: #4CAF50;
+}
+
+.export-button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.preview-button {
+    background-color: #FF9800;
+}
+
+.preview-button:hover {
+    background-color: #F57C00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.generate-button {
+    background-color: #2196F3;
+}
+
+.generate-button:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.form-group label::after {
+    content: '*';
+    color: #ff4444;
+    margin-left: 4px;
+}
+
+.form-group label.no-required::after {
+    content: '';
+    color: #ff4444;
+    margin-left: 4px;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}
+
+.form-group.has-error input[type="text"],
+.form-group.has-error textarea {
+    border-color: #ff4444;
+    box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.1);
+}
+
+.preview-section {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow: auto;
+    padding: 20px;
+}
+
+.preview-content {
+    background: white;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+    border-radius: 8px;
+    position: relative;
+    min-height: calc(100vh - 40px);
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+}
+
+.preview-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.3s;
+    z-index: 1001;
+}
+
+.preview-close:hover {
+    background: #ff0000;
+    transform: scale(1.1);
+}
+
+
+/* 预览内容样式隔离 */
+
+#previewContent {
+    all: initial;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+#previewContent * {
+    box-sizing: border-box;
+}
+
+#previewContent body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+}
+
+#previewContent .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#previewContent h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+#previewContent .bookmark-section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#previewContent .section-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#previewContent .bookmark-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+#previewContent .bookmark-item {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #333;
+}
+
+#previewContent .bookmark-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: #3498db;
+}
+
+#previewContent .bookmark-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+#previewContent .bookmark-description {
+    font-size: 0.9em;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    #previewContent .bookmark-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
