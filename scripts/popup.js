@@ -36,6 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 生成按钮点击事件
     generateButton.addEventListener('click', async() => {
+        await handleGenerateClick(false);
+    });
+
+    // 下载HTML按钮点击事件
+    const downloadHtmlButton = document.getElementById('downloadHtmlButton');
+    downloadHtmlButton.addEventListener('click', async() => {
+        await handleGenerateClick(true);
+    });
+
+    async function handleGenerateClick(isDownload) {
         // 重置所有错误状态
         document.querySelectorAll('.form-group').forEach(group => {
             group.classList.remove('has-error');
@@ -76,10 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // 显示加载状态
-            const originalText = generateButton.textContent;
-            generateButton.textContent = '正在生成...';
-            generateButton.disabled = true;
-            generateButton.classList.add('loading');
+            const originalText = isDownload ? downloadHtmlButton.textContent : generateButton.textContent;
+            const button = isDownload ? downloadHtmlButton : generateButton;
+            button.textContent = '正在生成...';
+            button.disabled = true;
+            button.classList.add('loading');
 
             // 隐藏之前的链接
             const generatedLink = document.getElementById('generatedLink');
@@ -109,18 +120,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // 调用beautify接口
-            const beautifyResult = await callBeautifyApi(customCode, siteConfig);
+            const beautifyResult = await callBeautifyApi(customCode, siteConfig, !isDownload);
 
-            // 显示生成的链接
-            const linkElement = generatedLink.querySelector('a');
-            linkElement.href = beautifyResult.data;
-            linkElement.textContent = beautifyResult.data;
-            generatedLink.style.display = 'block';
+            if (isDownload) {
+                // 创建下载链接
+                const blob = new Blob([beautifyResult.data], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${siteTitle}.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                // 显示生成的链接
+                const linkElement = generatedLink.querySelector('a');
+                linkElement.href = beautifyResult.data;
+                linkElement.textContent = beautifyResult.data;
+                generatedLink.style.display = 'block';
+            }
 
             // 恢复按钮状态
-            generateButton.textContent = originalText;
-            generateButton.disabled = false;
-            generateButton.classList.remove('loading');
+            button.textContent = originalText;
+            button.disabled = false;
+            button.classList.remove('loading');
 
             // 清除加载提示和定时器
             if (loadingTip) {
@@ -134,9 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('生成 HTML 失败，请稍后重试');
 
             // 恢复按钮状态
-            generateButton.textContent = originalText;
-            generateButton.disabled = false;
-            generateButton.classList.remove('loading');
+            const button = isDownload ? downloadHtmlButton : generateButton;
+            button.textContent = originalText;
+            button.disabled = false;
+            button.classList.remove('loading');
 
             // 清除加载提示和定时器
             if (loadingTip) {
@@ -146,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearInterval(jokeInterval);
             }
         }
-    });
+    }
 });
 
 // 扁平化书签数据，将所有书签收集到一个数组中

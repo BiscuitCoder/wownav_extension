@@ -17,9 +17,9 @@ async function testApiConnection() {
 }
 
 // 调用beautify接口
-async function callBeautifyApi(prompt, siteConfig) {
+async function callBeautifyApi(prompt, siteConfig, needCreatePage = true) {
     try {
-        console.log('Calling beautify API with:', { prompt, siteConfig });
+        console.log('Calling beautify API with:', { prompt, siteConfig, needCreatePage });
         const response = await fetch('http://localhost:3008/beautify', {
             method: 'POST',
             headers: {
@@ -27,7 +27,8 @@ async function callBeautifyApi(prompt, siteConfig) {
             },
             body: JSON.stringify({
                 prompt,
-                siteConfig
+                siteConfig,
+                needCreatePage
             })
         });
 

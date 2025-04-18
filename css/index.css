@@ -278,6 +278,22 @@ h2 {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
+.download-button {
+    background-color: transparent;
+    border: 2px solid #9E9E9E;
+    color: #9E9E9E;
+    opacity: 0.8;
+}
+
+.download-button:hover {
+    background-color: rgba(158, 158, 158, 0.1);
+    border-color: #757575;
+    color: #757575;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+}
+
 @media (max-width: 768px) {
     .button-group {
         flex-direction: column;

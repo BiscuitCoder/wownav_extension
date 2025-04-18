@@ -1,3 +1,10 @@
+// 监听扩展图标点击事件
+chrome.action.onClicked.addListener(() => {
+    chrome.tabs.create({
+        url: 'index.html'
+    });
+});
+
 // 监听来自 popup 的消息
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('Background received message:', request);
