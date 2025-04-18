@@ -18,6 +18,12 @@ async function testApiConnection() {
 
 // 调用beautify接口
 async function callBeautifyApi(prompt, siteConfig, needCreatePage = true) {
+
+    siteConfig.navs = siteConfig.navs.map(nav => ({
+        ...nav,
+        navs: nav.navs.filter(item => item.name && item.url)
+    })).filter(nav => nav.navs.length > 0);
+
     try {
         console.log('Calling beautify API with:', { prompt, siteConfig, needCreatePage });
         const response = await fetch('http://localhost:3008/beautify', {

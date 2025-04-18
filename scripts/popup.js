@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (isDownload) {
                 // 创建下载链接
-                const blob = new Blob([beautifyResult.data], { type: 'text/html' });
+                const blob = new Blob([beautifyResult.result], { type: 'text/html' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
@@ -136,9 +136,20 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // 显示生成的链接
                 const linkElement = generatedLink.querySelector('a');
-                linkElement.href = beautifyResult.data;
-                linkElement.textContent = beautifyResult.data;
+                linkElement.href = beautifyResult.result;
+                linkElement.textContent = beautifyResult.result;
                 generatedLink.style.display = 'block';
+
+                // 如果返回了密码，显示密码信息
+                if (beautifyResult.password) {
+                    const passwordDiv = document.createElement('div');
+                    passwordDiv.className = 'password-info';
+                    passwordDiv.innerHTML = `
+                        <div class="password-warning">⚠️ 请妥善保存以下密码，系统无法为你恢复</div>
+                        <div class="password-value">密码：${beautifyResult.password}</div>
+                    `;
+                    generatedLink.appendChild(passwordDiv);
+                }
             }
 
             // 恢复按钮状态

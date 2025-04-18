@@ -314,6 +314,27 @@ h2 {
     text-decoration: underline;
 }
 
+.password-info {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+}
+
+.password-warning {
+    color: #856404;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.password-value {
+    color: #533f03;
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
 
 /* 响应式布局 */
 
