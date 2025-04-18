@@ -104,17 +104,40 @@
     <div class="container">
         <!-- 左侧书签区域 -->
         <div class="bookmarks-section">
-            <h2>我的书签</h2>
+            <div class="bookmarks-header">
+                <h2>我的书签</h2>
+                <div class="bookmarks-stats">
+                    <span id="selectedTagsCount">已选择 <b id="selectedTagsCountValue">0</b> 个分类</span>
+                    <span class="stats-divider">|</span>
+                    <span id="selectedUrlsCount">已选择 <b id="selectedUrlsCountValue">0</b> 个网址</span>
+                </div>
+            </div>
             <div id="bookmarksList"></div>
         </div>
 
         <!-- 右侧SEO设置区域 -->
         <div class="seo-section">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h2>SEO设置</h2>
+                <h2>站点设置</h2>
                 <a href="http://localhost:3008/web3nav/" target="_blank" style="color: #4a90e2; text-decoration: none; font-weight: bold; font-size: 14px;">🔗 查看演示</a>
             </div>
             <form class="seo-form" id="seoForm">
+                <div class="form-group">
+                    <label for="tagSelect">分类 <span style="color: #ef4444;">*</span></label>
+                    <select id="tagSelect" class="tag-select" required>
+                        <option value="纯粹良心">纯粹良心</option>
+                        <option value="科技">科技</option>
+                        <option value="其他">其他</option>
+                        <option value="制造业">制造业</option>
+                        <option value="游戏">游戏</option>
+                        <option value="未分类">未分类</option>
+                        <option value="教育">教育</option>
+                        <option value="社交">社交</option>
+                        <option value="非营利">非营利</option>
+                        <option value="电商">电商</option>
+                    </select>
+                    <div class="error-message">请选择分类</div>
+                </div>
                 <div class="form-group">
                     <label for="siteTitle">网站标题</label>
                     <input type="text" id="siteTitle" placeholder="输入网站标题">
@@ -173,6 +196,7 @@ https://github.com/lxdao-official/.github/raw/main/images/LXDAO.png
     <script src="scripts/py.js"></script>
     <script src="scripts/popup.js"></script>
     <script src="scripts/api.js"></script>
+    <script src="js/state.js"></script>
 </body>
 
 </html>

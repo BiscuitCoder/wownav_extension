@@ -374,6 +374,10 @@ function convertToSiteConfig(bookmarks, seoInfo) {
         }))
     }));
 
+    // 获取选中的标签
+    const tagSelect = document.getElementById('tagSelect');
+    const selectedTag = tagSelect ? tagSelect.value : '';
+
     return {
         title: seoInfo.title,
         name: convertToPinyin(seoInfo.title), // 将标题转换为拼音
@@ -387,6 +391,7 @@ function convertToSiteConfig(bookmarks, seoInfo) {
         author: "书签导航生成器", // 默认值
         authorUrl: "https://github.com/wownav", // 默认值
         password: "123456", // 默认值
+        tag: selectedTag, // 添加标签字段
         navs
     };
 }
