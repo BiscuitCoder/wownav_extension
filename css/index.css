@@ -290,6 +290,11 @@ h2 {
     opacity: 1;
 }
 
+.download-button.loading::after {
+    border: 2px solid #64748b;
+    border-top-color: transparent;
+}
+
 .generated-link {
     margin-top: 1.5rem;
     text-align: center;
